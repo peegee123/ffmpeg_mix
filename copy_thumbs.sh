@@ -27,6 +27,7 @@ echo "pgw 1 v3 = ${v3}"
 echo "pgw 1 v4 = ${v4}"
 
 
+
 # thumbnailcreatorstack-multimediaappstore443f8064-rimuopwe7qs3/thumbnails/BigBuckBunny_2.mp4.png
 
 # thumbnailcreatorstack-multimediaappstore443f8064-rimuopwe7qs3/thumbnails/BigBuckBunny.mp4.png
@@ -50,8 +51,24 @@ ffmpeg -y -i v1.mp4 -i v2.mp4 -i v3.mp4 -i v4.mp4 \
 	-r 60 \
     "${OUTPUT_THUMBS_FILE_NAME}.mp4"
 
+# myvideo_john.trigger.txt.png.mp4
+ffmpeg -i "${OUTPUT_THUMBS_FILE_NAME}.mp4" -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls "${OUTPUT_THUMBS_FILE_NAME}.m3u8"
+
+# list all HLS files
+ls -l1  "${OUTPUT_THUMBS_FILE_NAME}"*.ts
+ls -l1  "${OUTPUT_THUMBS_FILE_NAME}".m3u8
 
 
 echo "Copying ${OUTPUT_THUMBS_FILE_NAME} to S3 at ${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}..."
-echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.mp4 --region ${AWS_REGION}
-aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.mp4 --region ${AWS_REGION}
+echo "Copying all HLS files..."
+
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.m3u8 --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.m3u8 --region ${AWS_REGION}
+
+#echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
+#aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
+
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+
+
