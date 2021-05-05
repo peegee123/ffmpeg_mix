@@ -5,6 +5,10 @@
 # export AWS_REGION=eu-west-2
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
+
+echo "pgw 1 this is version 2 (05-may-2021 at 16:48)"
+
+
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
 
 echo "pgw 1 INPUT_VIDEO_FILE_URL = ${INPUT_VIDEO_FILE_URL}"
