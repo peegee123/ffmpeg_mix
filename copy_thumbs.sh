@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 2 (05-may-2021 at 16:48)"
+echo "pgw 1 this is version 3 (15-may-2021 at 23:26)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
@@ -72,7 +72,11 @@ aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUM
 #echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
 #aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
 
-echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
-aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+#echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+#aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+
+echo aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
+aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
+
 
 
