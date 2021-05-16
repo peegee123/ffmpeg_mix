@@ -11,5 +11,6 @@ RUN unzip awscliv2.zip && \
 WORKDIR /files
 
 COPY ./copy_thumbs.sh /files
+COPY ./aws-mediaconvert-job-ptest1.json /files
 
 ENTRYPOINT ./copy_thumbs.sh
