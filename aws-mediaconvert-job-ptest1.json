@@ -1,7 +1,7 @@
 {
   "Queue": "arn:aws:mediaconvert:eu-west-2:840941131427:queues/Default",
   "UserMetadata": {},
-  "Role": "arn:aws:iam::840941131427:role/ThumbnailCreatorStack-initiateThumbnailGenerationS-KVRYQTTY9VGA",
+  "Role": "arn:aws:iam::840941131427:role/Pgw_MediaConvert_Role",
   "Settings": {
     "TimecodeConfig": {
       "Source": "ZEROBASED"

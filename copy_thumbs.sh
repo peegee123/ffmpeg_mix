@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 7 (16-may-2021 at 13:24)"
+echo "pgw 1 this is version 8 (16-may-2021 at 15:14)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
