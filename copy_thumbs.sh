@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 3 (15-may-2021 at 23:26)"
+echo "pgw 1 this is version 5 (16-may-2021 at 09:18)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
@@ -58,13 +58,18 @@ ffmpeg -y -i v1.mp4 -i v2.mp4 -i v3.mp4 -i v4.mp4 \
 
 
 #
-echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://test1stack-hellobucket-164mp5o6olqdp/ptest1.mp4 --region ${AWS_REGION}
-aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://test1stack-hellobucket-164mp5o6olqdp/ptest1.mp4 --region ${AWS_REGION}
+echo sed -e "s/ptest1.mp4/"${OUTPUT_THUMBS_FILE_NAME}.mp4"/g" aws-mediaconvert-job-ptest1.json > aws-mc-job.json
+sed -e "s/ptest1.mp4/"${OUTPUT_THUMBS_FILE_NAME}.mp4"/g" aws-mediaconvert-job-ptest1.json > aws-mc-job.json
 
 
 #
-echo aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mediaconvert-job-ptest1.json
-aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mediaconvert-job-ptest1.json
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
+
+
+#
+echo aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mc-job.json
+aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mc-job.json
 
 
 
