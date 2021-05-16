@@ -55,6 +55,20 @@ ffmpeg -y -i v1.mp4 -i v2.mp4 -i v3.mp4 -i v4.mp4 \
 	-r 60 \
     "${OUTPUT_THUMBS_FILE_NAME}.mp4"
 
+
+
+#
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://test1stack-hellobucket-164mp5o6olqdp/ptest1.mp4 --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://test1stack-hellobucket-164mp5o6olqdp/ptest1.mp4 --region ${AWS_REGION}
+
+
+#
+echo aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mediaconvert-job-ptest1.json
+aws mediaconvert create-job --endpoint-url https://ey3xqwxpb.mediaconvert.eu-west-2.amazonaws.com --region eu-west-2  --cli-input-json file://aws-mediaconvert-job-ptest1.json
+
+
+
+
 # myvideo_john.trigger.txt.png.mp4
 ffmpeg -i "${OUTPUT_THUMBS_FILE_NAME}.mp4" -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls "${OUTPUT_THUMBS_FILE_NAME}.m3u8"
 
