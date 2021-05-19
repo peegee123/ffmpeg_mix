@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 8 (16-may-2021 at 15:14)"
+echo "pgw 1 this is version 9 (19-may-2021 at 02:44)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
@@ -59,6 +59,38 @@ ffmpeg -y -i v1.mp4 -i v2.mp4 -i v3.mp4 -i v4.mp4 \
     "${OUTPUT_THUMBS_FILE_NAME}.mp4"
 
 echo "p3"
+
+
+
+
+# myvideo_john.trigger.txt.png.mp4
+ffmpeg -i "${OUTPUT_THUMBS_FILE_NAME}.mp4" -codec: copy -start_number 0 -hls_time 10 -hls_list_size 0 -f hls "${OUTPUT_THUMBS_FILE_NAME}.m3u8"
+
+# list all HLS files
+ls -l1  "${OUTPUT_THUMBS_FILE_NAME}"*.ts
+ls -l1  "${OUTPUT_THUMBS_FILE_NAME}".m3u8
+
+
+echo "Copying ${OUTPUT_THUMBS_FILE_NAME} to S3 at ${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}..."
+echo "Copying all HLS files..."
+
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.m3u8 --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.m3u8 --region ${AWS_REGION}
+
+#echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
+#aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME} --region ${AWS_REGION}
+
+#echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+#aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}"*.ts s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION}
+
+echo aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
+aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
+
+
+exit
+
+
+
 
 # Remove echo, as 
 echo sed -e "s/ptest1.mp4/"${OUTPUT_THUMBS_FILE_NAME}.mp4"/g" aws-mediaconvert-job-ptest1.json
