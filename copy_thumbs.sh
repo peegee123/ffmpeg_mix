@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 9 (19-may-2021 at 02:44)"
+echo "pgw 1 this is version 10 (19-may-2021 at 02:57)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
@@ -87,6 +87,13 @@ echo aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" 
 aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
 
 
+#
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
+
+echo "p6"
+
+
 exit
 
 
@@ -110,11 +117,6 @@ aws mediaconvert describe-endpoints --region ${AWS_REGION}
 echo "p6"
 
 
-#
-echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
-aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" "s3://test1stack-hellobucket-164mp5o6olqdp/${OUTPUT_THUMBS_FILE_NAME}.mp4" --region ${AWS_REGION}
-
-echo "p6"
 
 
 #
