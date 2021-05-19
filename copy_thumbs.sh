@@ -6,7 +6,7 @@
 
 #echo "Downloading ${INPUT_VIDEO_FILE_URL}..."
 
-echo "pgw 1 this is version 10 (19-may-2021 at 02:57)"
+echo "pgw 1 this is version 11 (19-may-2021 at 03:14)"
 
 
 echo "pgw 1 trigger file is ${INPUT_VIDEO_FILE_URL}"
@@ -85,6 +85,11 @@ aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.m3u8" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUM
 
 echo aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
 aws s3 sync . s3://${OUTPUT_S3_PATH}/ --region ${AWS_REGION} --exclude "*" --include "${OUTPUT_THUMBS_FILE_NAME}*.ts"
+
+
+#
+echo aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.mp4 --region ${AWS_REGION}
+aws s3 cp "${OUTPUT_THUMBS_FILE_NAME}.mp4" s3://${OUTPUT_S3_PATH}/${OUTPUT_THUMBS_FILE_NAME}.mp4 --region ${AWS_REGION}
 
 
 #
